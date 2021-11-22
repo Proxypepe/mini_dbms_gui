@@ -26,7 +26,7 @@ class ResultArea(QtWidgets.QWidget):
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
         self.verticalLayout.addLayout(self.horizontalLayout)
-        self.tableView = QtWidgets.QTableView(self)
+        self.tableView = QtWidgets.QTableWidget(self)
         self.tableView.setObjectName("tableView")
         self.verticalLayout.addWidget(self.tableView)
         self.verticalLayout_2.addLayout(self.verticalLayout)
