@@ -29,7 +29,15 @@ class Formatter:
 
 class SQLHighlighter(QtGui.QSyntaxHighlighter):
     keywords = [
-        'select', 'from',
+        'UPDATE', 'SET', 'ALTER', 'UNION ALL', 'WHERE', 'ALTER COLUMN', 'ALL', 'SELECT INTO', 'ALTER TABLE', 'NOT',
+        'NOT NULL', 'CREATE TABLE', 'EXISTS', 'SELECT', 'INDEX', 'OR', 'HAVING', 'AND', 'DATABASE', 'INSERT INTO',
+        'TRUNCATE TABLE', 'DROP VIEW', 'DELETE', 'CREATE UNIQUE INDEX', 'IS NOT NULL', 'PRIMARY KEY',
+        'INSERT INTO SELECT', 'DISTINCT', 'DROP', 'CHECK', 'ORDER BY', 'PROCEDURE', 'RIGHT JOIN', 'SELECT DISTINCT',
+        'CREATE PROCEDURE', 'GROUP BY', 'OUTER JOIN', 'COLUMN', 'DROP COLUMN', 'LEFT JOIN', 'ASC', 'INNER JOIN',
+        'LIMIT', 'IS NULL', 'ROWNUM', 'ANY', 'FULL OUTER JOIN', 'JOIN', 'DESC', 'CREATE', 'AS', 'BACKUP DATABASE',
+        'CASE', 'CONSTRAINT', 'UNION', 'BETWEEN', 'ADD', 'FOREIGN KEY', 'IN', 'DROP DEFAULT', 'ADD CONSTRAINT', 'FROM',
+        'DROP TABLE', 'LIKE', 'CREATE INDEX', 'DEFAULT', 'DROP DATABASE', 'CREATE DATABASE', 'DROP INDEX',
+        'CREATE VIEW', 'SELECT TOP', 'UNIQUE', 'REPLACE VIEW', 'VALUES', 'DROP CONSTRAINT', 'EXEC',
     ]
 
     braces = [
@@ -48,7 +56,7 @@ class SQLHighlighter(QtGui.QSyntaxHighlighter):
 
         rules += [(r'\b%s\b' % w, 0, Formatter.STYLES['keyword'])
                   for w in SQLHighlighter.keywords]
-        rules += [(r'\b%s\b' % w.upper(), 0, Formatter.STYLES['keyword'])
+        rules += [(r'\b%s\b' % w.lower(), 0, Formatter.STYLES['keyword'])
                   for w in SQLHighlighter.keywords]
         # rules += [(r'%s' % o, 0, Formatter.STYLES['operator'])
         #           for o in SQLHighlighter.operators]
