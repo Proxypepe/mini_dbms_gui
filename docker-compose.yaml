@@ -1,0 +1,16 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    ports:
+      - 32700:3306
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./sql/bb.sql:/data/application/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: someroot
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysql
