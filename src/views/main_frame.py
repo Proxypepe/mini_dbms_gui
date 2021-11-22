@@ -6,6 +6,10 @@ from src.views.result_area import ResultArea
 
 class MainWindow(QtWidgets.QMainWindow):
 
+    def __init__(self, controller=None):
+        super(MainWindow, self).__init__()
+        self.controller = controller
+
     def setup_ui(self):
         self.resize(750, 550)
         self.setWindowTitle("Test")
@@ -39,6 +43,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setStatusBar(self.statusbar)
 
         QtCore.QMetaObject.connectSlotsByName(self)
+
+
 
 
 if __name__ == "__main__":

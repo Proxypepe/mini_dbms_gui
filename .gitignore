@@ -2,6 +2,7 @@
 # Byte-compiled / optimized / DLL files
 sql/
 ui/
+data/
 *.xml
 *.iml
 __pycache__/
@@ -110,7 +111,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+src/.env
 .venv
 env/
 venv/
