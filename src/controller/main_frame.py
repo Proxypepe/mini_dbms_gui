@@ -32,10 +32,13 @@ class MainWindowController(QObject):
         query = self.execute_page.textEdit.toPlainText()
         rows = self.repository.execute(query)
         if rows is not None:
+            descriptions = rows.cursor.description
+            headers = [description[0] for description in descriptions]
             rows_count = rows.rowcount
-            column_count = len(rows.cursor.description)
+            column_count = len(descriptions)
             self.result_page.tableView.setRowCount(rows_count)
             self.result_page.tableView.setColumnCount(column_count)
+            self.result_page.tableView.setHorizontalHeaderLabels(headers)
             for row_number, row_data in enumerate(rows):
                 for column_number, data in enumerate(row_data):
                     self.result_page.tableView.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
@@ -43,3 +46,4 @@ class MainWindowController(QObject):
     def __init_window(self):
         self.view.setup_ui()
         self.view.show()
+
