@@ -1,4 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from src.views.update_field import UpdateField
 
 
 class UpdatePage(QtWidgets.QWidget):
@@ -7,7 +8,6 @@ class UpdatePage(QtWidgets.QWidget):
         self.setup_ui()
 
     def setup_ui(self):
-        self.setObjectName("self")
         self.resize(678, 341)
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
@@ -34,17 +34,8 @@ class UpdatePage(QtWidgets.QWidget):
         self.label_3.setObjectName("label_3")
         self.horizontalLayout.addWidget(self.label_3)
         self.verticalLayout.addLayout(self.horizontalLayout)
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.field_box = QtWidgets.QComboBox(self)
-        self.field_box.setMinimumSize(QtCore.QSize(150, 0))
-        self.field_box.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.field_box.setObjectName("field_box")
-        self.horizontalLayout_2.addWidget(self.field_box)
-        self.new_value_le = QtWidgets.QLineEdit(self)
-        self.new_value_le.setObjectName("new_value_le")
-        self.horizontalLayout_2.addWidget(self.new_value_le)
-        self.verticalLayout.addLayout(self.horizontalLayout_2)
+        self.widget = UpdateField()
+        self.verticalLayout.addWidget(self.widget)
         self.verticalLayout_4.addLayout(self.verticalLayout)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -78,10 +69,14 @@ class UpdatePage(QtWidgets.QWidget):
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem1)
-        self.pushButton = QtWidgets.QPushButton(self)
-        self.pushButton.setMinimumSize(QtCore.QSize(120, 0))
-        self.pushButton.setObjectName("pushButton")
-        self.horizontalLayout_4.addWidget(self.pushButton)
+        self.add_field_btn = QtWidgets.QPushButton(self)
+        self.add_field_btn.setMinimumSize(QtCore.QSize(120, 0))
+        self.add_field_btn.setObjectName("add_field_btn")
+        self.horizontalLayout_4.addWidget(self.add_field_btn)
+        self.update_btn = QtWidgets.QPushButton(self)
+        self.update_btn.setMinimumSize(QtCore.QSize(120, 0))
+        self.update_btn.setObjectName("update_btn")
+        self.horizontalLayout_4.addWidget(self.update_btn)
         self.verticalLayout_3.addLayout(self.horizontalLayout_4)
         self.verticalLayout_4.addLayout(self.verticalLayout_3)
         self.horizontalLayout_5.addLayout(self.verticalLayout_4)
@@ -100,7 +95,9 @@ class UpdatePage(QtWidgets.QWidget):
         self.comboBox_3.setItemText(2, _translate("self", "<"))
         self.comboBox_3.setItemText(3, _translate("self", ">="))
         self.comboBox_3.setItemText(4, _translate("self", "<="))
-        self.pushButton.setText(_translate("self", "Update record"))
+        self.comboBox_3.setItemText(5, _translate("self", "!="))
+        self.update_btn.setText(_translate("self", "Update record"))
+        self.add_field_btn.setText(_translate("self", "Add field"))
 
 
 if __name__ == "__main__":

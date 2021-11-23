@@ -3,6 +3,11 @@ from src.views.update_page import UpdatePage
 
 
 class GRUDScreen(QtWidgets.QWidget):
+    def __init__(self, parent=None, controller=None):
+        super(GRUDScreen, self).__init__(parent)
+        self.controller = controller
+        self.setup_ui()
+
     def setup_ui(self):
         self.setObjectName("self")
         self.resize(685, 475)

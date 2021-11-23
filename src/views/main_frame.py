@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 from src.views.execute_area import ExecuteArea
 from src.views.result_area import ResultArea
+from src.views.crud_frame import GRUDScreen
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -9,6 +10,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, controller=None):
         super(MainWindow, self).__init__()
         self.controller = controller
+        self.page_3 = None
 
     def setup_ui(self):
         self.resize(750, 550)
@@ -24,16 +26,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.stackedWidget = QtWidgets.QStackedWidget(self.centralwidget)
 
         self.page = ExecuteArea(self)
-
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.page)
-
-        self.widget = QtWidgets.QWidget(self.page)
-
-        self.verticalLayout.addWidget(self.widget)
         self.stackedWidget.addWidget(self.page)
-        self.page_2 = ResultArea(self)
 
+        self.page_2 = ResultArea(self)
         self.stackedWidget.addWidget(self.page_2)
+
+        self.page_3 = GRUDScreen(self)
+        self.stackedWidget.addWidget(self.page_3)
+
         self.horizontalLayout.addWidget(self.stackedWidget)
         self.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(self)
@@ -43,8 +43,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setStatusBar(self.statusbar)
 
         QtCore.QMetaObject.connectSlotsByName(self)
-
-
 
 
 if __name__ == "__main__":

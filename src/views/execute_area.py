@@ -36,6 +36,9 @@ class ExecuteArea(QtWidgets.QWidget):
         self.verticalLayout.setObjectName("verticalLayout")
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
+        self.easy_btn = QtWidgets.QPushButton(self)
+        self.easy_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.verticalLayout.addWidget(self.easy_btn)
         self.result_btn = QtWidgets.QPushButton(self)
         self.result_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.result_btn.setObjectName("result_btn")
@@ -49,6 +52,7 @@ class ExecuteArea(QtWidgets.QWidget):
         self.gridLayout.addLayout(self.verticalLayout_2, 0, 0, 1, 1)
 
         self.label.setText("Coding space")
+        self.easy_btn.setText("Easy mode")
         self.result_btn.setText("See the result")
         self.execute_btn.setText("Execute")
 

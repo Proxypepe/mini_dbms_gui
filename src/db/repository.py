@@ -34,6 +34,5 @@ class Repository:
         if cls.__instance is None:
             if engine is None and url is None:
                 engine = create_engine(DATABASE_URL)
-            return Repository(engine=engine)
-        else:
-            return cls.__instance
+                cls.__instance = Repository(engine=engine)
+        return cls.__instance
