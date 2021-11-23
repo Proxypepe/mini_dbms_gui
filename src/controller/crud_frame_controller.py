@@ -6,11 +6,14 @@ from PyQt5.QtCore import QObject
 from src.views.crud_frame import CRUDScreen
 from src.db.repository import Repository
 from .update_frame_controller import UpdateController
+from .read_frame_controller import ReadFrameController
 from src.core.config import DATABASE_NAME
 
 
 class CRUDFrameController(QObject):
-
+    """
+    Controller for CRUD screen
+    """
     def __init__(self):
         super(CRUDFrameController, self).__init__()
         self.repository = Repository.create_repository()
@@ -18,15 +21,19 @@ class CRUDFrameController(QObject):
         self.table_headers = self.set_table_fields()
         self.__view: CRUDScreen = None
         self.create_tap = None
-        self.update_controller = None
+        self.update_controller: UpdateController = None
         self.delete_tap = None
-        self.read_tap = None
+        self.read_controller: ReadFrameController = None
 
     def init_ui(self, parent):
         self.__view = CRUDScreen(parent)
         self.__view.setup_ui()
 
     def __get_table_names(self) -> Optional[list[str]]:
+        """
+
+        :return: Optional[list[str]]
+        """
         if DATABASE_NAME == '':
             return
         query = f"select TABLE_NAME from information_schema.tables where information_schema.tables.TABLE_SCHEMA = '{DATABASE_NAME}'"
@@ -55,6 +62,9 @@ class CRUDFrameController(QObject):
         self.update_controller.current_table = table_name
         self.update_controller.set_conditions(self.table_headers)
 
+        self.read_controller.current_table = table_name
+        self.read_controller.show_current_table()
+
     @property
     def view(self):
         return self.__view
@@ -68,6 +78,7 @@ class CRUDFrameController(QObject):
         self.create_tap = self.__view.create_page
         self.update_controller = UpdateController(self.__view.update_page, self.repository)
         self.delete_tap = self.__view.delete_page
-        self.read_tap = self.__view.read_page
+        self.read_controller = ReadFrameController(self.__view.read_page, self.repository)
+
         self.__view.current_table_box.currentTextChanged.connect(self.update_fields)
         self.update_fields()
