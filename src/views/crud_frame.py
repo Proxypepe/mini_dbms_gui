@@ -2,9 +2,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from src.views.update_page import UpdatePage
 
 
-class GRUDScreen(QtWidgets.QWidget):
+class CRUDScreen(QtWidgets.QWidget):
     def __init__(self, parent=None, controller=None):
-        super(GRUDScreen, self).__init__(parent)
+        super(CRUDScreen, self).__init__(parent)
         self.controller = controller
         self.setup_ui()
 
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
 
-    ui = GRUDScreen()
+    ui = CRUDScreen()
     ui.setup_ui()
     ui.show()
     sys.exit(app.exec_())

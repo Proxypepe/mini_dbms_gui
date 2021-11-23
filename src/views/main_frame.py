@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 from src.views.execute_area import ExecuteArea
 from src.views.result_area import ResultArea
-from src.views.crud_frame import GRUDScreen
+from src.views.crud_frame import CRUDScreen
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -31,7 +31,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.page_2 = ResultArea(self)
         self.stackedWidget.addWidget(self.page_2)
 
-        self.page_3 = GRUDScreen(self)
+        self.page_3 = CRUDScreen(self)
         self.stackedWidget.addWidget(self.page_3)
 
         self.horizontalLayout.addWidget(self.stackedWidget)

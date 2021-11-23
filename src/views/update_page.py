@@ -55,6 +55,7 @@ class UpdatePage(QtWidgets.QWidget):
         self.comboBox_3.addItem("")
         self.comboBox_3.addItem("")
         self.comboBox_3.addItem("")
+        self.comboBox_3.addItem("")
         self.horizontalLayout_3.addWidget(self.comboBox_3)
         self.condition_value = QtWidgets.QLineEdit(self)
         self.condition_value.setObjectName("condition_value")
