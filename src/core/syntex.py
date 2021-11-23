@@ -1,5 +1,6 @@
 from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtGui import QColor
+from .dictionary import keywords
 
 
 class Formatter:
@@ -28,17 +29,7 @@ class Formatter:
 
 
 class SQLHighlighter(QtGui.QSyntaxHighlighter):
-    keywords = [
-        'UPDATE', 'SET', 'ALTER', 'UNION ALL', 'WHERE', 'ALTER COLUMN', 'ALL', 'SELECT INTO', 'ALTER TABLE', 'NOT',
-        'NOT NULL', 'CREATE TABLE', 'EXISTS', 'SELECT', 'INDEX', 'OR', 'HAVING', 'AND', 'DATABASE', 'INSERT INTO',
-        'TRUNCATE TABLE', 'DROP VIEW', 'DELETE', 'CREATE UNIQUE INDEX', 'IS NOT NULL', 'PRIMARY KEY',
-        'INSERT INTO SELECT', 'DISTINCT', 'DROP', 'CHECK', 'ORDER BY', 'PROCEDURE', 'RIGHT JOIN', 'SELECT DISTINCT',
-        'CREATE PROCEDURE', 'GROUP BY', 'OUTER JOIN', 'COLUMN', 'DROP COLUMN', 'LEFT JOIN', 'ASC', 'INNER JOIN',
-        'LIMIT', 'IS NULL', 'ROWNUM', 'ANY', 'FULL OUTER JOIN', 'JOIN', 'DESC', 'CREATE', 'AS', 'BACKUP DATABASE',
-        'CASE', 'CONSTRAINT', 'UNION', 'BETWEEN', 'ADD', 'FOREIGN KEY', 'IN', 'DROP DEFAULT', 'ADD CONSTRAINT', 'FROM',
-        'DROP TABLE', 'LIKE', 'CREATE INDEX', 'DEFAULT', 'DROP DATABASE', 'CREATE DATABASE', 'DROP INDEX',
-        'CREATE VIEW', 'SELECT TOP', 'UNIQUE', 'REPLACE VIEW', 'VALUES', 'DROP CONSTRAINT', 'EXEC',
-    ]
+    keywords = keywords
 
     braces = [
         '\{', '\}', '\(', '\)', '\[', '\]',
@@ -73,7 +64,7 @@ class SQLHighlighter(QtGui.QSyntaxHighlighter):
                       for (pat, index, fmt) in rules]
 
     def highlightBlock(self, text):
-        for expression, nth, format in self.rules:
+        for expression, nth, _format in self.rules:
             index = expression.indexIn(text, )
             if index >= 0:
                 if expression.pattern() in [r'"[^"\\]*(\\.[^"\\]*)*"', r"'[^'\\]*(\\.[^'\\]*)*'"]:
@@ -93,7 +84,7 @@ class SQLHighlighter(QtGui.QSyntaxHighlighter):
                     continue
                 index = expression.pos(nth)
                 length = len(expression.cap(nth))
-                self.setFormat(index, length, QColor(format))
+                self.setFormat(index, length, QColor(_format))
                 index = expression.indexIn(text, index + length)
         self.setCurrentBlockState(0)
         in_multiline = self.match_multiline(text, *self.tri_single)

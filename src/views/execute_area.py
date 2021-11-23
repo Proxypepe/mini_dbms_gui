@@ -1,5 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 from src.core.syntex import SQLHighlighter
+from .text_edit import TextEdit, SQLDictionaryCompleter
 
 
 class ExecuteArea(QtWidgets.QWidget):
@@ -24,8 +26,10 @@ class ExecuteArea(QtWidgets.QWidget):
         self.verticalLayout_2.addWidget(self.label)
         self.horizontalLayout = QtWidgets.QHBoxLayout(self)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.textEdit = QtWidgets.QTextEdit(self)
+        self.textEdit = TextEdit(self)
         self.highlight = SQLHighlighter(self.textEdit.document())
+        completer = SQLDictionaryCompleter()
+        self.textEdit.setCompleter(completer)
         self.textEdit.setObjectName("textEdit")
         self.horizontalLayout.addWidget(self.textEdit)
         self.verticalLayout = QtWidgets.QVBoxLayout(self)
