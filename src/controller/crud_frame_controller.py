@@ -43,6 +43,14 @@ class CRUDFrameController(QObject):
         res = self.repository.execute(query)
         return [x[0] for x in res]
 
+    def __get_datatypes(self, table_name) -> Optional[list[tuple[str, str]]]:
+        if DATABASE_NAME == '':
+            return
+        query = f"select COLUMN_NAME, DATA_TYPE from information_schema.columns where table_schema = '{DATABASE_NAME}' " \
+                f"and TABLE_NAME = '{table_name}';"
+        res = self.repository.execute(query)
+        return [x for x in res]
+
     def set_table_names(self):
         for table_name in self.tables:
             self.__view.current_table_box.addItem(table_name)
@@ -59,9 +67,11 @@ class CRUDFrameController(QObject):
 
     def update_fields(self):
         table_name = self.__view.current_table_box.currentText()
-        self.table_headers = self.set_table_fields(table_name
-                                                   )
+        data_types = self.__get_datatypes(table_name)
+        self.table_headers = self.set_table_fields(table_name)
+
         self.update_controller.current_table = table_name
+        self.update_controller.validate_data = data_types
         self.update_controller.set_boxes(self.table_headers)
         self.update_controller.set_conditions(self.table_headers)
 
@@ -72,7 +82,8 @@ class CRUDFrameController(QObject):
         self.delete_controller.set_condition(self.table_headers)
 
         self.create_controller.current_table = table_name
-        self.create_controller.add_fields(self.table_headers)
+        self.create_controller.validate_data = data_types
+        self.create_controller.add_fields(data_types)
 
     @property
     def view(self):
@@ -91,3 +102,4 @@ class CRUDFrameController(QObject):
 
         self.__view.current_table_box.currentTextChanged.connect(self.update_fields)
         self.update_fields()
+

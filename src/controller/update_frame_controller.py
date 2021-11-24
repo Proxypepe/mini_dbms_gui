@@ -8,6 +8,7 @@ from src.db.repository import Repository
 class UpdateController:
     def __init__(self, view: UpdatePage, repository: Repository) -> None:
         self._current_table = ""
+        self._validate_data = None
         self.fields = []
         self.field_names = []
         self.repository = repository
@@ -73,3 +74,11 @@ class UpdateController:
     @current_table.setter
     def current_table(self, table_name):
         self._current_table = table_name
+
+    @property
+    def validate_data(self):
+        return self._validate_data
+
+    @validate_data.setter
+    def validate_data(self, data_types):
+        self._validate_data = data_types

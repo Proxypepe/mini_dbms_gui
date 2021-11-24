@@ -23,6 +23,8 @@ class CreateField(QtWidgets.QWidget):
         self.value_le.setObjectName("value_le")
         self.horizontalLayout.addWidget(self.value_le)
         self.type_lbl = QtWidgets.QLabel(self)
+        self.type_lbl.setMinimumSize(QtCore.QSize(50, 0))
+        self.type_lbl.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
         self.type_lbl.setObjectName("type_lbl")
         self.horizontalLayout.addWidget(self.type_lbl)
 
