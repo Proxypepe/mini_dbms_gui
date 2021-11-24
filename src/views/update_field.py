@@ -12,6 +12,7 @@ class UpdateField(QtWidgets.QWidget):
         self.horizontalLayout = QtWidgets.QHBoxLayout(self)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.field_box_2 = QtWidgets.QComboBox(self)
+        self.field_box_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.field_box_2.setMinimumSize(QtCore.QSize(150, 0))
         self.field_box_2.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.field_box_2.setObjectName("field_box_2")

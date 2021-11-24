@@ -7,6 +7,7 @@ from src.views.crud_frame import CRUDScreen
 from src.db.repository import Repository
 from .update_frame_controller import UpdateController
 from .read_frame_controller import ReadFrameController
+from .delete_frame_controller import DeleteFrameController
 from src.core.config import DATABASE_NAME
 
 
@@ -22,7 +23,7 @@ class CRUDFrameController(QObject):
         self.__view: CRUDScreen = None
         self.create_tap = None
         self.update_controller: UpdateController = None
-        self.delete_tap = None
+        self.delete_controller: DeleteFrameController = None
         self.read_controller: ReadFrameController = None
 
     def init_ui(self, parent):
@@ -57,13 +58,17 @@ class CRUDFrameController(QObject):
 
     def update_fields(self):
         table_name = self.__view.current_table_box.currentText()
-        self.table_headers = self.set_table_fields(table_name)
-        self.update_controller.set_boxes(self.table_headers)
+        self.table_headers = self.set_table_fields(table_name
+                                                   )
         self.update_controller.current_table = table_name
+        self.update_controller.set_boxes(self.table_headers)
         self.update_controller.set_conditions(self.table_headers)
 
         self.read_controller.current_table = table_name
         self.read_controller.show_current_table()
+
+        self.delete_controller.current_table = table_name
+        self.delete_controller.set_condition(self.table_headers)
 
     @property
     def view(self):
@@ -77,7 +82,7 @@ class CRUDFrameController(QObject):
         self.set_table_names()
         self.create_tap = self.__view.create_page
         self.update_controller = UpdateController(self.__view.update_page, self.repository)
-        self.delete_tap = self.__view.delete_page
+        self.delete_controller = DeleteFrameController(self.__view.delete_page, self.repository)
         self.read_controller = ReadFrameController(self.__view.read_page, self.repository)
 
         self.__view.current_table_box.currentTextChanged.connect(self.update_fields)

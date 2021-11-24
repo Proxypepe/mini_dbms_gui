@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from src.views.update_page import UpdatePage
 from src.views.read_page import ReadPage
+from src.views.delete_page import DeletePage
 
 
 class CRUDScreen(QtWidgets.QWidget):
@@ -31,6 +32,7 @@ class CRUDScreen(QtWidgets.QWidget):
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
         self.current_table_box = QtWidgets.QComboBox(self)
+        self.current_table_box.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.current_table_box.setMinimumSize(QtCore.QSize(150, 0))
         self.current_table_box.setObjectName("current_table_box")
         self.horizontalLayout.addWidget(self.current_table_box)
@@ -43,7 +45,7 @@ class CRUDScreen(QtWidgets.QWidget):
         self.update_page = UpdatePage(self)
         self.update_page.setObjectName("update_page")
         self.CRUDPages.addTab(self.update_page, "")
-        self.delete_page = QtWidgets.QWidget()
+        self.delete_page = DeletePage(self)
         self.delete_page.setObjectName("delete_page")
         self.CRUDPages.addTab(self.delete_page, "")
         self.read_page = ReadPage()
