@@ -8,6 +8,7 @@ from src.db.repository import Repository
 from .update_frame_controller import UpdateController
 from .read_frame_controller import ReadFrameController
 from .delete_frame_controller import DeleteFrameController
+from .create_frame_controller import CreateFrameController
 from src.core.config import DATABASE_NAME
 
 
@@ -21,7 +22,7 @@ class CRUDFrameController(QObject):
         self.tables = self.__get_table_names()
         self.table_headers = self.set_table_fields()
         self.__view: CRUDScreen = None
-        self.create_tap = None
+        self.create_controller: CreateFrameController = None
         self.update_controller: UpdateController = None
         self.delete_controller: DeleteFrameController = None
         self.read_controller: ReadFrameController = None
@@ -70,6 +71,9 @@ class CRUDFrameController(QObject):
         self.delete_controller.current_table = table_name
         self.delete_controller.set_condition(self.table_headers)
 
+        self.create_controller.current_table = table_name
+        self.create_controller.add_fields(self.table_headers)
+
     @property
     def view(self):
         return self.__view
@@ -80,7 +84,7 @@ class CRUDFrameController(QObject):
         self.__view = value
 
         self.set_table_names()
-        self.create_tap = self.__view.create_page
+        self.create_controller = CreateFrameController(self.__view.create_page, self.repository)
         self.update_controller = UpdateController(self.__view.update_page, self.repository)
         self.delete_controller = DeleteFrameController(self.__view.delete_page, self.repository)
         self.read_controller = ReadFrameController(self.__view.read_page, self.repository)

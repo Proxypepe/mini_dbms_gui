@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from src.views.update_page import UpdatePage
 from src.views.read_page import ReadPage
 from src.views.delete_page import DeletePage
+from src.views.create_page import CreatePage
 
 
 class CRUDScreen(QtWidgets.QWidget):
@@ -39,7 +40,7 @@ class CRUDScreen(QtWidgets.QWidget):
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.CRUDPages = QtWidgets.QTabWidget(self)
         self.CRUDPages.setObjectName("CRUDPages")
-        self.create_page = QtWidgets.QWidget()
+        self.create_page = CreatePage(self)
         self.create_page.setObjectName("create_page")
         self.CRUDPages.addTab(self.create_page, "")
         self.update_page = UpdatePage(self)
