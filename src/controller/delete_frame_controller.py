@@ -21,4 +21,4 @@ class DeleteFrameController:
         if self.view.condition_value.text() != "":
             query += f" WHERE {self.view.condition_value_2.currentText()} {self.view.comboBox_3.currentText()} " \
                      f"{self.view.condition_value.text()}"
-        print(query)
+        self.repository.execute(query)

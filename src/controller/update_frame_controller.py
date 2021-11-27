@@ -53,7 +53,7 @@ class UpdateController:
             print(f"args {', '.join(args)}")
             query += ', '.join(args) + f" WHERE {self.condition.currentText()} {self.view.comboBox_3.currentText()} " \
                                        f"{self.view.condition_value.text()}"
-            print(query)
+            self.repository.execute(query)
 
     def set_boxes(self, fields):
         self.field_names = fields
